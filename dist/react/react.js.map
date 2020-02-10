@@ -1,0 +1,1 @@
+{"version":3,"file":"react.js","sources":["react.js"],"sourcesContent":["var React;\nexport function requireReactLazily() {\n    return React || (React = require('react'));\n}\n//# sourceMappingURL=react.js.map"],"names":[],"mappings":"AAAA,IAAI,KAAK,CAAC;AACH,SAAS,kBAAkB,GAAG;AACrC,IAAI,OAAO,KAAK,KAAK,KAAK,GAAG,OAAO,CAAC,OAAO,CAAC,CAAC,CAAC;AAC/C;;;;"}

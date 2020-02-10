@@ -1,0 +1,1 @@
+{"version":3,"file":"ApolloContext.d.ts","sourceRoot":"","sources":["../../../src/react/context/ApolloContext.ts"],"names":[],"mappings":";AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,oBAAoB,CAAC;AAGlD,MAAM,WAAW,kBAAkB;IACjC,MAAM,CAAC,EAAE,YAAY,CAAC,MAAM,CAAC,CAAC;IAC9B,cAAc,CAAC,EAAE,MAAM,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC;CACnC;AAeD,wBAAgB,kBAAkB,SAQjC;AAED,wBAAgB,gBAAgB,gDAM/B"}
