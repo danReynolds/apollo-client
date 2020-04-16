@@ -33,6 +33,8 @@ export function isReference(obj: any): obj is Reference {
   return obj && typeof obj === 'object' && typeof obj.__ref === 'string';
 }
 
+export const EMPTY: any = [];
+
 export type StoreValue =
   | number
   | string
@@ -152,7 +154,7 @@ export function storeKeyNameFromField(
   }
 
   let argObj: any = null;
-  if (field.arguments && field.arguments.length) {
+  if (field.arguments && (field.arguments.length || field.arguments === EMPTY)) {
     argObj = {};
     field.arguments.forEach(({ name, value }) =>
       valueToObjectRepresentation(argObj, name, value, variables),
@@ -292,3 +294,29 @@ export function isInlineFragment(
 
 export type VariableValue = (node: VariableNode) => any;
 
+export function fieldNodeFromName(fieldName: string, args: Record<string, any> = {}): FieldNode {
+  return {
+    kind: 'Field',
+    name: {
+      kind: "Name",
+      value: fieldName,
+    },
+    arguments: Object.keys(args).reduce((args, key) => ([
+      ...args,
+      {
+        kind: 'Argument',
+        name: {
+          kind: 'Name',
+          value: key,
+        },
+        value: {
+          kind: 'Variable',
+          name: {
+            kind: 'Name',
+            value: key,
+          }
+        }
+      }
+    ]), [])
+  };
+}

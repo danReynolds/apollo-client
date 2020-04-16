@@ -13,6 +13,7 @@ import {
   getFragmentFromSelection,
 } from '../../utilities/graphql/fragments';
 import {
+  EMPTY,
   isField,
   getTypenameFromResult,
   storeKeyNameFromField,
@@ -21,6 +22,7 @@ import {
   argumentsObjectFromField,
   Reference,
   isReference,
+  fieldNodeFromName,
 } from '../../utilities/graphql/storeUtils';
 import { canUseWeakMap } from '../../utilities/common/canUse';
 import { IdGetter } from "./types";
@@ -430,17 +432,27 @@ export class Policies {
 
   public getStoreFieldName(
     typename: string | undefined,
-    field: FieldNode,
-    variables: Record<string, any>,
+    nameOrField: string | FieldNode,
+    variables?: Record<string, any>,
   ): string {
+    let field: FieldNode;
+    if (typeof nameOrField === 'string') {
+      field = fieldNodeFromName(nameOrField, variables);
+      if (variables && Object.keys(variables).length === 0) {
+        field = { ...field, arguments: EMPTY }
+      }
+    } else {
+      field = nameOrField;
+    }
     const fieldName = field.name.value;
     const policy = this.getFieldPolicy(typename, fieldName, false);
     let storeFieldName: string | undefined;
 
     let keyFn = policy && policy.keyFn;
     if (keyFn && typename) {
-      const args = argumentsObjectFromField(field, variables);
-      const context = { typename, fieldName, field, variables, policies: this };
+      const variablesOrDefault = variables ?? {};
+      const args = argumentsObjectFromField(field, variablesOrDefault);
+      const context = { typename, fieldName, field, variables: variablesOrDefault, policies: this };
       while (keyFn) {
         const specifierOrString = keyFn(args, context);
         if (Array.isArray(specifierOrString)) {
