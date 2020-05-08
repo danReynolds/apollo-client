@@ -1,0 +1,1 @@
+{"version":3,"file":"ApolloConsumer.d.ts","sourceRoot":"","sources":["../../../src/react/context/ApolloConsumer.tsx"],"names":[],"mappings":";AAEA,OAAO,EAAE,YAAY,EAAE,MAAM,oBAAoB,CAAC;AAIlD,MAAM,WAAW,mBAAmB;IAClC,QAAQ,EAAE,CAAC,MAAM,EAAE,YAAY,CAAC,MAAM,CAAC,KAAK,KAAK,CAAC,UAAU,GAAG,IAAI,CAAC;CACrE;AAED,eAAO,MAAM,cAAc,EAAE,KAAK,CAAC,EAAE,CAAC,mBAAmB,CAexD,CAAC"}

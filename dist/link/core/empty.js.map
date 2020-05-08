@@ -1,0 +1,1 @@
+{"version":3,"file":"empty.js","sources":["empty.js"],"sourcesContent":["import { ApolloLink } from './ApolloLink.js';\n\nvar empty = ApolloLink.empty;\n\nexport { empty };\n//# sourceMappingURL=empty.js.map\n"],"names":[],"mappings":";;AAEG,IAAC,KAAK,GAAG,UAAU,CAAC;;;;"}

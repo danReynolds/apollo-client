@@ -1,0 +1,1 @@
+{"version":3,"file":"split.js","sources":["split.js"],"sourcesContent":["import { ApolloLink } from './ApolloLink.js';\n\nvar split = ApolloLink.split;\n\nexport { split };\n//# sourceMappingURL=split.js.map\n"],"names":[],"mappings":";;AAEG,IAAC,KAAK,GAAG,UAAU,CAAC;;;;"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"execute.js","sources":["execute.js"],"sourcesContent":["import { ApolloLink } from './ApolloLink.js';\n\nvar execute = ApolloLink.execute;\n\nexport { execute };\n//# sourceMappingURL=execute.js.map\n"],"names":[],"mappings":";;AAEG,IAAC,OAAO,GAAG,UAAU,CAAC;;;;"}
