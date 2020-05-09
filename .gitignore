@@ -31,12 +31,7 @@ build/Release
 node_modules
 
 # don't commit compiled files
-lib
-benchmark_lib
-test-lib
-dist
-npm
-!flow-typed/npm
+
 
 # webstorm
 .idea/

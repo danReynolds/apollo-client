@@ -1,0 +1,14 @@
+import { FieldNode } from 'graphql';
+import { NormalizedCache } from './types';
+import { Reference, StoreValue, StoreObject } from '../../utilities/graphql/storeUtils';
+import { DeepMerger } from '../../utilities/common/mergeDeep';
+export declare function getTypenameFromStoreObject(store: NormalizedCache, objectOrReference: StoreObject | Reference): string | undefined;
+export declare function fieldNameFromStoreName(storeFieldName: string): string;
+export interface FieldValueToBeMerged {
+    __field: FieldNode;
+    __typename: string;
+    __value: StoreValue;
+}
+export declare function isFieldValueToBeMerged(value: any): value is FieldValueToBeMerged;
+export declare function makeProcessedFieldsMerger(): DeepMerger<[]>;
+//# sourceMappingURL=helpers.d.ts.map
