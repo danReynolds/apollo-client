@@ -1234,6 +1234,83 @@ describe('EntityStore', () => {
     });
   });
 
+  it("allows clearing of evicted entities from cached queries", () => {
+    const query: DocumentNode = gql`
+      query {
+        authors {
+          name
+          hobby
+        }
+      }
+    `;
+
+    const cache = new InMemoryCache();
+
+    const TedChiangData = {
+      __typename: "Author",
+      name: "Ted Chiang",
+      hobby: "video games",
+      id: 1,
+    };
+
+    const IsaacAsimovData = {
+      __typename: "Author",
+      name: "Isaac Asimov",
+      hobby: "chemistry",
+      id: 2,
+    };
+
+    cache.writeQuery({
+      query,
+      data: {
+        authors: [TedChiangData, IsaacAsimovData],
+      },
+    });
+
+    expect(cache.extract()).toEqual({
+      "Author:1": {
+        __typename: "Author",
+        name: "Ted Chiang",
+        hobby: "video games",
+        id: 1,
+      },
+      "Author:2": {
+        __typename: "Author",
+        name: "Isaac Asimov",
+        hobby: "chemistry",
+        id: 2,
+      },
+      ROOT_QUERY: {
+        __typename: "Query",
+        authors: [{ __ref: "Author:1" }, { __ref: "Author:2" }],
+      },
+    });
+
+    cache.evict("Author:1");
+    const remainingAuthorsQuery: any = cache.readQuery({
+      query,
+    });
+    cache.writeQuery({
+      query,
+      data: {
+        authors: remainingAuthorsQuery?.authors,
+      },
+    });
+
+    expect(cache.extract()).toEqual({
+      "Author:2": {
+        __typename: "Author",
+        name: "Isaac Asimov",
+        hobby: "chemistry",
+        id: 2,
+      },
+      ROOT_QUERY: {
+        __typename: "Query",
+        authors: [{ __ref: "Author:2" }],
+      },
+    });
+  });
+
   it("allows evicting specific fields with specific arguments using EvictOptions", () => {
     const query: DocumentNode = gql`
       query {
